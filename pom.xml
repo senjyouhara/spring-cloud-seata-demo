@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <groupId>com.senjyouhara</groupId>
+    <artifactId>spring-cloud-seata-demo</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>8</java.version>
+        <spring-context-support.version>1.0.2</spring-context-support.version>
+        <commons-collections4.version>4.2</commons-collections4.version>
+        <seata.version>1.1.0</seata.version>
+        <fastjson.version>1.2.54</fastjson.version>
+        <elasticsearch.version>6.4.1</elasticsearch.version>
+        <spring.data.elasticsearch.version>3.1.10.RELEASE</spring.data.elasticsearch.version>
+        <dubbo.version>2.7.3</dubbo.version>
+        <dubbo.actuator.version>2.7.1</dubbo.actuator.version>
+        <dubbo-registry-nacos.version>2.7.1</dubbo-registry-nacos.version>
+        <dubbo.kryo.version>2.7.3</dubbo.kryo.version>
+        <nacos-client.version>1.1.4</nacos-client.version>
+        <nacos.config.version>2.1.0.RELEASE</nacos.config.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger.ui.version>1.8.7</swagger.ui.version>
+        <swagger.mg.ui.version>1.0.6</swagger.mg.ui.version>
+        <swagger.butler.version>2.0.0</swagger.butler.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <druid-starter>1.1.10</druid-starter>
+        <sharding-sphere.version>3.1.0</sharding-sphere.version>
+        <security-oauth2.version>2.3.5.RELEASE</security-oauth2.version>
+        <security-jwt.version>1.0.9.RELEASE</security-jwt.version>
+        <redisson.version>3.9.1</redisson.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
+        <patchca.version>1.0.0</patchca.version>
+        <hutool.version>4.3.1</hutool.version>
+        <jasypt.version>2.0.0</jasypt.version>
+        <mysql.version>8.0.17</mysql.version>
+        <fastdfs.version>1.27-SNAPSHOT</fastdfs.version>
+        <hikariCP.version>3.4.0</hikariCP.version>
+        <mybatis-plus-boot-starter.version>3.2.0</mybatis-plus-boot-starter.version>
+        <aliyun-sdk-oss>3.4.0</aliyun-sdk-oss>
+        <qiniu-java-sdk>7.2.17</qiniu-java-sdk>
+        <easypoi.version>4.0.0</easypoi.version>
+        <spring-boot-admin.version>2.1.0</spring-boot-admin.version>
+        <velocity.version>1.7</velocity.version>
+        <commons-configuration.version>1.10</commons-configuration.version>
+        <txlcn.version>5.0.2.RELEASE</txlcn.version>
+        <platform-bom>Cairo-SR3</platform-bom>
+        <spring-cloud-alibaba-dependencies.version>2.1.1.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-boot-dependencies.version>2.1.6.RELEASE</spring-boot-dependencies.version>
+        <spring-cloud-dependencies.version>Greenwich.SR5</spring-cloud-dependencies.version>
+        <spring-boot-maven-plugin.version>2.1.1.RELEASE</spring-boot-maven-plugin.version>
+        <docker-maven-plugin.version>1.2.0</docker-maven-plugin.version>
+        <sonar.exclusions>senjyouhara-job/**/*, senjyouhara-register/**/*, senjyouhara-web/**/*</sonar.exclusions>
+        <docker.baseImage>openjdk:8-jre-alpine</docker.baseImage>
+        <docker.volumes>/tmp</docker.volumes>
+        <docker.image.prefix>hub.mall.com:8080/mallcloud</docker.image.prefix>
+        <docker.java.security.egd>-Djava.security.egd=file:/dev/./urandom</docker.java.security.egd>
+        <docker.java.opts>-Xms128m -Xmx128m</docker.java.opts>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+    </properties>
+    <modelVersion>4.0.0</modelVersion>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>business-service</module>
+        <module>order-service</module>
+        <module>storage-service</module>
+        <module>account-service</module>
+    </modules>
+
+    <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos.config.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+                <version>${nacos.config.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-seata</artifactId>
+                <version>${nacos.config.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.spring</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring-context-support.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.config.version}</version>
+            </dependency>
+            <!--            dubbo高速序列化-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-serialization-kryo</artifactId>
+                <version>${dubbo.kryo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos-client.version}</version>
+            </dependency>
+
+            <!--            数据库连接池-->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${hikariCP.version}</version>
+            </dependency>
+            <!--            验证码-->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+            <!-- druid 官方 starter -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-starter}</version>
+            </dependency>
+            <!--            mysql-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- mybatis-plus start -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <!-- 在Redis基础上的一个Java实用工具包 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>${commons-configuration.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding-sphere.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-parent</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>${platform-bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-commons-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <!-- Repositories to allow snapshot and milestone BOM imports during development.
+            This section is stripped by the flatten plugin during install/deploy. -->
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
